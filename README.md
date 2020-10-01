@@ -59,7 +59,7 @@ COPY to_docker/* .
 
 13. `Save` or `Save and Build`
 
-14. Now, every time you push new `Dockerfile` docker container will be re-built and put on DockerHub so that you can pull it on Rackham and migrate to Bianca via Wharf (or pull it wherever you want).
+14. Now, every time you push to the repo, docker container will be re-built and put on DockerHub so that you can pull it on Rackham and migrate to Bianca via Wharf (or pull it wherever you want).
 
 15. On another machine just do `docker pull user/repo:tag`, e.g.: 
 ```sh
