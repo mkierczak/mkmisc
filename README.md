@@ -9,8 +9,10 @@ Miscellaneous odds and ends.
  3. Open RStudio and start a new project from the existing directory.
  4. In R console do: 
 
-> `install.packages('renv')`
-> `renv::init()`
+```r
+install.packages('renv')
+renv::init()
+```
 
  5. Create a separate directory that will contain all your scripts and that will be copied to docker container, e.g.
 	`mkdir to_docker`
