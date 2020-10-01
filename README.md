@@ -55,7 +55,7 @@ COPY to_docker/* .
 
 11. Click on the 'Builds' tab and than on "Link to GitHub". Follow the instructions.
 
-12. Go back to 'Repositories -> YourRepo -> Builds', select GitHub user or organisation and than the GitHub repository to link. If you select 'Branch' as 'Source Type', your container will be built every time you push anything to the repo. This might not be what you want. Instead, you can select 'Tag' and put `/^[0-9.]+$/` as 'Source'. Thus, every time you tag your git code with a version, like '1.2.1' and push the tag to GitHub, the container build will happen. 
+12. Go back to 'Repositories -> YourRepo -> Builds', select GitHub user or organisation and than the GitHub repository to link. If you select 'Branch' as 'Source Type', your container will be built every time you push anything to the repo. This might not be what you want. Instead, you can select 'Tag' and put `/^[0-9.]+$/` as 'Source' and `release-{sourceref}` as 'Docker Tag'. Thus, every time you tag your git code with a version, like '1.2.1' and push the tag to GitHub, the container build will happen. 
 
 13. `Save` or `Save and Build`
 
