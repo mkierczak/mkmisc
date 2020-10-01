@@ -442,9 +442,13 @@ git push --tags</code></pre>
 </ol>
 <pre class="sh"><code>docker pull quiestrho/mkmisc:latest</code></pre>
 <ol start="16" style="list-style-type: decimal">
-<li>Run your code:</li>
+<li>Run your code using docker:</li>
 </ol>
-<pre><code>docker run mkmisc:latest R CMD BATCH /project/scripts/test.R</code></pre>
+<pre class="sh"><code>docker run mkmisc:latest R CMD BATCH /project/scripts/test.R</code></pre>
+<p>or using Singularity:</p>
+<pre class="sh"><code>singularity pull docker://mkmisc:latest    # to pull repo
+singularity build docker://mkmisc:latest   # to build container, e.g. on Rackham
+singularity exec docker://mkmisc:latest R CMD BATCH /project/scripts/test.R # to execute a command inside the container</code></pre>
 <p><strong>NOTE</strong><br />
 Sometimes everything works fine, but sometimes the build fails, you can see why on DockerHub in “Latest Builds” logs. In this test case, some R packages required <code>libssl-dev</code> and <code>libxml2-dev</code> which I had to install using <code>apt</code> (see <code>Dockerfile</code>).</p>
 </div>

@@ -72,9 +72,15 @@ git push --tags
 docker pull quiestrho/mkmisc:latest
 ```
 
-16. Run your code:
-```
+16. Run your code using docker:
+```sh
 docker run mkmisc:latest R CMD BATCH /project/scripts/test.R
+```
+or using Singularity:
+```sh
+singularity pull docker://mkmisc:latest    # to pull repo
+singularity build docker://mkmisc:latest   # to build container, e.g. on Rackham
+singularity exec docker://mkmisc:latest R CMD BATCH /project/scripts/test.R # to execute a command inside the container
 ```
 
 **NOTE**  
