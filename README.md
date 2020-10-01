@@ -55,11 +55,17 @@ COPY to_docker/* .
 
 11. Click on the 'Builds' tab and than on "Link to GitHub". Follow the instructions.
 
-12. Go back to 'Repositories -> YourRepo -> Builds', select GitHub user or organisation and than the GitHub repository to link. 
+12. Go back to 'Repositories -> YourRepo -> Builds', select GitHub user or organisation and than the GitHub repository to link. If you select 'Branch' as 'Source Type', your container will be built every time you push anything to the repo. This might not be what you want. Instead, you can select 'Tag' and put `/^[0-9.]+$/` as 'Source'. Thus, every time you tag your git code with a version, like '1.2.1' and push the tag to GitHub, the container build will happen. 
 
 13. `Save` or `Save and Build`
 
-14. Now, every time you push new `Dockerfile` docker container will be re-built and put on DockerHub so that you can pull it on Rackham and migrate to Bianca via Wharf (or pull it wherever you want).
+14. Now, every time you push to the repo with a tag like '1.2.1', Docker container will be built with and put on DockerHub tagged as 'release-1.2.1' so that you can pull it on Rackham and migrate to Bianca via Wharf (or pull it wherever you want). You tag by:
+
+```sh
+git tag -a 1.2.1 -m 'Adding new awesome 1.2.1 version' # or just 
+git tag 1.2.1 # to create a lightweight tag
+git push --tags
+```
 
 15. On another machine just do `docker pull user/repo:tag`, e.g.: 
 ```sh
@@ -71,4 +77,5 @@ docker pull quiestrho/mkmisc:latest
 docker run mkmisc:latest R CMD BATCH /project/scripts/test.R
 ```
 
-** NOTE *** Sometimes everything works fine, but sometimes the build fails, you can see why on DockerHub in "Latest Builds" logs. In this test case, some R packages required `libssl-dev` and `libxml2-dev` which I had to install using `apt` (see `Dockerfile`).
+**NOTE**  
+Sometimes everything works fine, but sometimes the build fails, you can see why on DockerHub in "Latest Builds" logs. In this test case, some R packages required `libssl-dev` and `libxml2-dev` which I had to install using `apt` (see `Dockerfile`).

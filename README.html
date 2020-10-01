@@ -430,12 +430,23 @@ COPY to_docker/* .</code></pre>
 <li><p>Go to DockerHub (NBIS has own, contact our CTO to add you to the organisation).</p></li>
 <li><p>Create a new repository.</p></li>
 <li><p>Click on the ‘Builds’ tab and than on “Link to GitHub”. Follow the instructions.</p></li>
-<li><p>Go back to ‘Repositories -&gt; YourRepo -&gt; Builds’, select GitHub user or organisation and than the GitHub repository to link.</p></li>
+<li><p>Go back to ‘Repositories -&gt; YourRepo -&gt; Builds’, select GitHub user or organisation and than the GitHub repository to link. If you select ‘Branch’ as ‘Source Type’, your container will be built every time you push anything to the repo. This might not be what you want. Instead, you can select ‘Tag’ and put <code>/^[0-9.]+$/</code> as ‘Source’. Thus, every time you tag your git code with a version, like ‘1.2.1’ and push the tag to GitHub, the container build will happen.</p></li>
 <li><p><code>Save</code> or <code>Save and Build</code></p></li>
-<li><p>Now, every time you push new <code>Dockerfile</code> docker container will be re-built and put on DockerHub so that you can pull it on Rackham and migrate to Bianca via Wharf (or pull it wherever you want).</p></li>
-<li><p>On another machine just do <code>docker pull user/repo:tag</code>, e.g.:</p></li>
+<li><p>Now, every time you push to the repo with a tag like ‘1.2.1’, Docker container will be built with and put on DockerHub tagged as ‘release-1.2.1’ so that you can pull it on Rackham and migrate to Bianca via Wharf (or pull it wherever you want). You tag by:</p></li>
+</ol>
+<pre class="sh"><code>git tag -a 1.2.1 -m &#39;Adding new awesome 1.2.1 version&#39; # or just 
+git tag 1.2.1 # to create a lightweight tag
+git push --tags</code></pre>
+<ol start="15" style="list-style-type: decimal">
+<li>On another machine just do <code>docker pull user/repo:tag</code>, e.g.:</li>
 </ol>
 <pre class="sh"><code>docker pull quiestrho/mkmisc:latest</code></pre>
+<ol start="16" style="list-style-type: decimal">
+<li>Run your code:</li>
+</ol>
+<pre><code>docker run mkmisc:latest R CMD BATCH /project/scripts/test.R</code></pre>
+<p><strong>NOTE</strong><br />
+Sometimes everything works fine, but sometimes the build fails, you can see why on DockerHub in “Latest Builds” logs. In this test case, some R packages required <code>libssl-dev</code> and <code>libxml2-dev</code> which I had to install using <code>apt</code> (see <code>Dockerfile</code>).</p>
 </div>
 </div>
 
