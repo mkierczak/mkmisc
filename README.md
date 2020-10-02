@@ -28,7 +28,7 @@ renv::init()
 
 ```Docker
 FROM rstudio/r-base:4.0.2-xenial AS builder
-MAINTAINER Marcin Kierczak <marcin.kierczak@scilifelab.se>
+MAINTAINER Marcin Kierczak <marcin.kierczak_ANTISPAM_scilifelab.se>
 ENV RENV_VERSION 0.12.0
 
 RUN apt update -y && apt install -y \
@@ -84,4 +84,4 @@ singularity exec docker://mkmisc:latest R CMD BATCH /project/scripts/test.R # to
 ```
 
 **NOTE**  
-Sometimes everything works fine, but sometimes the build fails, you can see why on DockerHub in "Latest Builds" logs. In this test case, some R packages required `libssl-dev` and `libxml2-dev` which I had to install using `apt` (see `Dockerfile`).
+Sometimes everything works fine, but sometimes the build fails, you can see why in the logs located on DockerHub under "Latest Builds". In this test case, some R packages required extra libraries: `libssl-dev` and `libxml2-dev` which I had to install using `apt` (see `Dockerfile`).

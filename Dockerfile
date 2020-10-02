@@ -1,5 +1,5 @@
 FROM rstudio/r-base:4.0.2-xenial AS builder
-MAINTAINER Marcin Kierczak <marcin.kierczak@scilifelab.se>
+MAINTAINER Marcin Kierczak <marcin.kierczak_ANTISPAM_scilifelab.se>
 ENV RENV_VERSION 0.12.0
 
 RUN apt update -y && apt install -y \
